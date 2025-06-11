@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Assistant IA Hôtel Marriott Jnan Palace, Fès</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #004080;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #004080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00264d;
+        }
+        #reponse {
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            max-width: 700px;
+            white-space: pre-wrap; /* pour retour à la ligne */
+        }
+    </style>
+</head>
+<body>
+    <h1>Assistant IA Hôtel Marriott Jnan Palace, Fès</h1>
+    <form id="questionForm">
+        <input type="text" id="question" placeholder="Pose ta question ici" autocomplete="off" />
+        <button type="submit">Envoyer</button>
+    </form>
+    <div id="reponse"></div>
+
+    <script>
+        const form = document.getElementById('questionForm');
+        const questionInput = document.getElementById('question');
+        const reponseDiv = document.getElementById('reponse');
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const question = questionInput.value.trim();
+            if (!question) {
+                reponseDiv.textContent = "Merci de poser une question.";
+                return;
+            }
+
+            reponseDiv.textContent = "Recherche de la réponse...";
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Erreur dans la requête.");
+                }
+
+                const data = await response.json();
+                reponseDiv.textContent = data.answer;
+            } catch (error) {
+                reponseDiv.textContent = "Erreur serveur : " + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
