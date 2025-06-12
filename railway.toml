@@ -1,5 +1,14 @@
-[build]
-buildCommand = "pip install -r server/requirements.txt"
+[phases.setup]
+commands = [
+  "python3 -m venv venv",
+  "source venv/bin/activate",
+  "pip install -r server/requirements.txt"
+]
 
-[deploy]
-startCommand = "python server/app.py"
+[phases.build]
+commands = []
+
+[phases.start]
+commands = [
+  "python3 server/app.py"
+]
