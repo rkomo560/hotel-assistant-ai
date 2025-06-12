@@ -23,7 +23,7 @@ class AssistantHotel:
 
 # Test rapide (à supprimer ou commenter dans l’application finale)
 if __name__ == "__main__":
-    assistant = AssistantHotel("data/corpus.txt")
+    assistant = AssistantHotel("server/data/corpus.txt")
     while True:
         q = input("Question: ")
         print("Réponse:", assistant.repondre(q))

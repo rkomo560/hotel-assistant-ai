@@ -6,7 +6,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # autorise toutes les origines par défaut
 
-assistant = AssistantHotel("data/corpus.txt")
+assistant = AssistantHotel("server/data/corpus.txt")
 
 @app.route("/")
 def index():
