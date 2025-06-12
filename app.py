@@ -1,8 +1,11 @@
 import os
 from flask import Flask, render_template, request, jsonify
 from chatbot.model import AssistantHotel
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # autorise toutes les origines par défaut
+
 assistant = AssistantHotel("data/corpus.txt")
 
 @app.route("/")
